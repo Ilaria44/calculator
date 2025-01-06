@@ -57,13 +57,15 @@ function displayNumber(num) {
   } 
 
   if(display.textContent == "0" || isSecondNumStart === true) {
-    display.textContent = num;
+    display.textContent = "";
+    setTimeout(() => display.textContent = num, 80);
     isSecondNumStart = false;
 
   } else {
     display.textContent += num;
   }
 }
+
 
 
 function getUserInput() {
@@ -122,8 +124,6 @@ function getUserInput() {
   buttons.addEventListener("click", getNum);
   buttons.addEventListener("click", getOperator)
 
-  
-  
 }  
 
 

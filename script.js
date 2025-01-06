@@ -2,6 +2,7 @@
 let firstNum = 0;
 let secondNum = 0;
 let operation;
+let result;
 let isSecondNumStart = false;
 let isNumListenerOn = true;
 
@@ -50,7 +51,7 @@ function operate(a, b, operator) {
 }
 
 
-//displays number, if 0 it replaces it - if already contains a . don't add it
+//displays numbers - allows only for a single "."
 function displayNumber(num) {
   if(num === "." && display.textContent.includes(".")) {
     return;
@@ -70,8 +71,11 @@ function displayNumber(num) {
 
 function getUserInput() {
 
+  //listens for num selection
   function getNum(e) {
     if(e.target.classList.contains("number")) {
+      e.target.classList.add("selected");
+      setTimeout(() => e.target.classList.remove("selected"), 100);
       let number = e.target.textContent;
       displayNumber(number);
     }
@@ -79,12 +83,14 @@ function getUserInput() {
   }
 
   
-
+  //listens for operator selection
   function getOperator(e) {
     if(e.target.classList.contains("operator")) {
       firstNum = Number(display.textContent);
       operation = e.target.textContent;
       isSecondNumStart = true;
+
+      e.target.classList.add("selected");
   
       buttons.removeEventListener("click", getOperator);
       buttons.addEventListener("click", getResult);
@@ -98,14 +104,20 @@ function getUserInput() {
   }
 
 
-
+  //listens for "=" selection 
   function getResult(e) {
     if(e.target.id === "operate-button") {
       secondNum = Number(display.textContent);
       buttons.removeEventListener("click", getNum);
       isNumListenerOn = false;
 
-      let result = operate(firstNum, secondNum, operation);
+      e.target.classList.add("selected");
+      setTimeout(() => e.target.classList.remove("selected"), 100);
+
+
+      document.querySelectorAll(".operator").forEach((item) => item.classList.remove("selected"));
+
+      result = operate(firstNum, secondNum, operation);
     
       display.textContent = result;
 

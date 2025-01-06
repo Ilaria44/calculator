@@ -109,3 +109,12 @@ p {
 .side > button, #operate-button {
   background-color: rgb(164, 199, 164)
 }
+
+
+.number.selected {
+  background-color: rgb(198, 216, 198);
+}
+
+.operator.selected, #operate-button.selected {
+  background-color: rgb(104, 160, 104);
+}
